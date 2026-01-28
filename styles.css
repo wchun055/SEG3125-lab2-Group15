@@ -35,3 +35,12 @@
   border: 1px solid #ccc;
   border-top: none;
 }
+
+/* Without width and height settings the images wont be visible.*/
+#displayProduct img {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  width: 200pt;
+  height: 200pt;
+}

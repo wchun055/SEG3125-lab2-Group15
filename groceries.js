@@ -7,6 +7,7 @@ var products = [
 		vegetarian: true,
 		glutenFree: true,
         organic: true,
+		image: "assets/lettuce.jpg",
 		price: 1.99
 	},
 	{
@@ -14,6 +15,7 @@ var products = [
 		vegetarian: true,
 		glutenFree: false,
         organic: false,
+		image: "assets/whole-wheat-bread.jpg",
 		price: 2.35
 	},
 	{
@@ -21,6 +23,7 @@ var products = [
 		vegetarian: false,
 		glutenFree: true,
         organic: true,
+		image: "assets/salmon.jpg",
 		price: 10.00
 	},
     {
@@ -28,6 +31,7 @@ var products = [
 		vegetarian: false,
 		glutenFree: true,
         organic: false,
+		image: "assets/ground-beef.jpg",
 		price: 15.49
 	},
     {
@@ -35,6 +39,7 @@ var products = [
 		vegetarian: false,
 		glutenFree: false,
         organic: false,
+		image: "assets/potato-chips.jpg",
 		price: 4.30
 	},
     {
@@ -42,6 +47,7 @@ var products = [
 		vegetarian: true,
 		glutenFree: true,
         organic: true,
+		image: "assets/mango.png",
 		price: 5.00
 	},
     {
@@ -49,6 +55,7 @@ var products = [
 		vegetarian: false,
 		glutenFree: false,
         organic: false,
+		image: "assets/frozen-pizza.jpg",
 		price: 4.99
 	},
     {
@@ -56,6 +63,7 @@ var products = [
 		vegetarian: true,
 		glutenFree: true,
         organic: true,
+		image: "assets/tomato.jpg",
 		price: 0.99
 	},
     {
@@ -63,6 +71,7 @@ var products = [
 		vegetarian: true,
 		glutenFree: false,
         organic: true,
+		image: "assets/strawberry.jpg",
 		price: 5.45
 	},
     {
@@ -70,6 +79,7 @@ var products = [
 		vegetarian: false,
 		glutenFree: true,
         organic: true,
+		image: "assets/celery.jpg",
 		price: 16.00
 	}
 ];

@@ -52,7 +52,7 @@ function selectedItems(){
 }
 
 // Update the product tab HTML to have the correct products only.
-function populateProductList(prodList){
+function populateProductList(prodList, accesibility){
     var displayProduct = document.getElementById("displayProduct");
     displayProduct.innerHTML = "";
 		
@@ -66,20 +66,40 @@ function populateProductList(prodList){
 
 		displayProduct.appendChild(checkbox);
 		
-		var label = document.createElement('label')
-		label.htmlFor = productName;
-		label.appendChild(document.createTextNode(productName));
+		if (accesibility["image"] == true){ // If the image setting is selected, replace labels with images.
+			var imageLabel = document.createElement('img');
+			
+			imageLabel.htmlFor = productName;
+			imageLabel.style.backgroundImage = "url(" + item["image"] + ")";
 
-		displayProduct.appendChild(label);
-		
-		// create a breakline node and add in HTML DOM
-		displayProduct.appendChild(document.createElement("br"));    
+			displayProduct.appendChild(imageLabel);
+
+			var br = document.createElement("br");
+			br.style.marginBottom = "50pt"; // To ensure that multiple images are not stuck together we add some margin space per product option.
+
+			displayProduct.appendChild(br);   
+		}
+
+		else{
+			var label = document.createElement('label')
+			
+			if (accesibility["largeFont"] == true){ // If the large font setting is selected, ensure labels have large font size.
+				label.style.fontSize = "20pt";
+			}
+
+			label.htmlFor = productName;
+			label.appendChild(document.createTextNode(productName));
+
+			displayProduct.appendChild(label);
+			displayProduct.appendChild(document.createElement("br"));    
+		}
 	}
 }
 
 // Creating a product list that adheres to the customer diet/profile.
-function updateProducts(profile){
-	updatedProducts = new Set([]); // Using a set to avoid duplicate additions.
+function updateProducts(diet, accesibility){
+	updatedProductSet = new Set([]); // Using a set to avoid duplicate additions.
+	updatedProduct = [];
 	toCheck = [];
 
 	var products = [
@@ -88,6 +108,7 @@ function updateProducts(profile){
 		vegetarian: true,
 		glutenFree: true,
         organic: true,
+		image: "assets/lettuce.jpg",
 		price: 1.99
 	},
 	{
@@ -95,6 +116,7 @@ function updateProducts(profile){
 		vegetarian: true,
 		glutenFree: false,
         organic: false,
+		image: "assets/whole-wheat-bread.jpg",
 		price: 2.35
 	},
 	{
@@ -102,6 +124,7 @@ function updateProducts(profile){
 		vegetarian: false,
 		glutenFree: true,
         organic: true,
+		image: "assets/salmon.jpg",
 		price: 10.00
 	},
     {
@@ -109,6 +132,7 @@ function updateProducts(profile){
 		vegetarian: false,
 		glutenFree: true,
         organic: false,
+		image: "assets/ground-beef.jpg",
 		price: 15.49
 	},
     {
@@ -116,6 +140,7 @@ function updateProducts(profile){
 		vegetarian: false,
 		glutenFree: false,
         organic: false,
+		image: "assets/potato-chips.jpg",
 		price: 4.30
 	},
     {
@@ -123,6 +148,7 @@ function updateProducts(profile){
 		vegetarian: true,
 		glutenFree: true,
         organic: true,
+		image: "assets/mango.png",
 		price: 5.00
 	},
     {
@@ -130,6 +156,7 @@ function updateProducts(profile){
 		vegetarian: false,
 		glutenFree: false,
         organic: false,
+		image: "assets/frozen-pizza.jpg",
 		price: 4.99
 	},
     {
@@ -137,6 +164,7 @@ function updateProducts(profile){
 		vegetarian: true,
 		glutenFree: true,
         organic: true,
+		image: "assets/tomato.jpg",
 		price: 0.99
 	},
     {
@@ -144,6 +172,7 @@ function updateProducts(profile){
 		vegetarian: true,
 		glutenFree: false,
         organic: true,
+		image: "assets/strawberry.jpg",
 		price: 5.45
 	},
     {
@@ -151,12 +180,13 @@ function updateProducts(profile){
 		vegetarian: false,
 		glutenFree: true,
         organic: true,
+		image: "assets/celery.jpg",
 		price: 16.00
 	}
 ];
 
-	for (let key in profile){
-		if (profile[key] == true){
+	for (let key in diet){
+		if (diet[key] == true){
 			toCheck.push(key);
 		}
 	}
@@ -164,16 +194,22 @@ function updateProducts(profile){
 	for (let i = 0; i < products.length; i++){
 		for (let j = 0; j < toCheck.length; j++){
 			if (products[i][toCheck[j]] == true){
-				updatedProducts.add(products[i]);
+				updatedProductSet.add(products[i]);
 			}
 			else{
-				updatedProducts.delete(products[i]);
+				updatedProductSet.delete(products[i]);
 				break;
 			}
 		}
 	}
 
-	populateProductList(updatedProducts) // Populate the HTML with the updated product list.
+	updatedProduct = Array.from(updatedProductSet);
+	
+	if (accesibility["sortLow"] == true){
+		updatedProduct.sort((a, b) => a.price - b.price);
+	}
+
+	populateProductList(updatedProduct, accesibility) // Populate the HTML with the updated product list.
 }
 
 // Check which choices were made on profile.
@@ -195,7 +231,8 @@ function saveProfile(){
 
 	var accesibility = {
 		largeFont : false,
-		image : false
+		image : false,
+		sortLow : false
 	}
 
 	if (veggieCheck.checked){
@@ -218,7 +255,11 @@ function saveProfile(){
 		accesibility["image"] = true;
 	}
 
-	updateProducts(diet); // Call with our specific diet list to update the product list.
+	if (sortLow.checked){
+		accesibility["sortLow"] = true;
+	}
+
+	updateProducts(diet, accesibility); // Call with our specific diet list to update the product list.
 	
 }
 
