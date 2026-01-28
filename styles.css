@@ -1,5 +1,17 @@
 /* This style sheet is taken from  https://www.w3schools.com/howto/howto_js_tabs.asp> */
 
+/*body and footer styling to allow the footer to stay at the bottom of the page.*/
+body {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  min-height: 100vh; /* Ensure the body spans the full height of the viewport */
+}
+
+footer {
+  margin-top: auto; /* Push the footer to the bottom */
+}
+
+
 /* Style the tab */
 .tab {
   overflow: hidden;

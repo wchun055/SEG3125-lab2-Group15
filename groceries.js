@@ -1,5 +1,5 @@
-// Array of products, each product is an object with different fieldset
-// A set of ingredients should be added to products		 
+// Array of products, each product is an object with different fieldset.
+// A set of ingredients should be added to products.
 
 var products = [
 	{
@@ -83,29 +83,45 @@ var products = [
 		price: 16.00
 	}
 ];
-	
 
+// Creating a product list that adheres to the customer diet/profile.
+function updateProducts(diet, accesibility){
+	updatedProductSet = new Set([]); // Using a set to avoid duplicate additions.
+	updatedProduct = [];
+	toCheck = [];
 
-// given restrictions provided, make a reduced list of products
-// prices should be included in this list, as well as a sort based on price
-
-function restrictListProducts(prods, restriction) {
-	let product_names = [];
-	for (let i=0; i<prods.length; i+=1) {
-		if ((restriction == "Vegetarian") && (prods[i].vegetarian == true)){
-			product_names.push(prods[i].name);
-		}
-		else if ((restriction == "GlutenFree") && (prods[i].glutenFree == true)){
-			product_names.push(prods[i].name);
-		}
-		else if (restriction == "None"){
-			product_names.push(prods[i].name);
+	for (let key in diet){
+		if (diet[key] == true){
+			toCheck.push(key);
 		}
 	}
-	return product_names;
+
+	for (let i = 0; i < products.length; i++){
+		for (let j = 0; j < toCheck.length; j++){
+			if (products[i][toCheck[j]] == true){
+				updatedProductSet.add(products[i]);
+			}
+			else{
+				updatedProductSet.delete(products[i]);
+				break;
+			}
+		}
+	}
+
+	if (toCheck.length == 0){ // If the user has no diet restrictions, show all products.
+		updatedProductSet = products;
+	}
+
+	updatedProduct = Array.from(updatedProductSet);
+	
+	if (accesibility["sortLow"] == true){
+		updatedProduct.sort((a, b) => a.price - b.price);
+	}
+
+	populateProductList(updatedProduct, accesibility) // Populate the HTML with the updated product list.
 }
 
-// Calculate the total price of items, with received parameter being a list of products
+// Calculate the total price of items, with received parameter being a list of products.
 function getTotalPrice(chosenProducts) {
 	totalPrice = 0;
 	for (let i=0; i<products.length; i+=1) {
