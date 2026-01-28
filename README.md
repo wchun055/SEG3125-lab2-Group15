@@ -1,4 +1,6 @@
-# SEG3125 Group 15 Lab 1
+# SEG3125 Group 15 Lab 2
+
+Grocery site with product filter and accesibility features.
 
 Winona Chung (300298148)
 
