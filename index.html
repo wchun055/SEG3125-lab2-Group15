@@ -23,12 +23,26 @@
   <h3>Customer Information</h3>
   <p>Tell us a bit about you.</p>
 	Choose a Category:
-	<select id="dietSelect" name="dietSelect" onchange="populateListProductChoices(this.id, 'displayProduct')">
-	<option value=""></option>
-	<option value="Vegetarian">Vegetarian</option>
-    <option value="GlutenFree">GlutenFree</option>
-    <option value="None">None</option>
-	</select>
+
+    <form id="myForm">
+        <label>Vegetarian</label>
+        <input type="checkbox" id="veggieCheck"><br>
+
+        <label>Gluten Free</label>
+        <input type="checkbox" id="glutenCheck"><br>
+
+        <label>Organic</label>
+        <input type="checkbox" id="organicCheck"><br>
+
+        <label>Larger Font Size</label>
+        <input type="checkbox" id="fontCheck"><br>
+
+        <label>Replace Text With Images</label>
+        <input type="checkbox" id="imageCheck"><br>
+
+        <button id="customerSubmit">Submit</button>
+    </form>
+
 </div>
 
 <div id="Products" class="tabcontent">
