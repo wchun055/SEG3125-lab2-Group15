@@ -59,14 +59,14 @@ var products = [
 		price: 0.99
 	},
     {
-		name: "veggie sticks",
+		name: "strawberry",
 		vegetarian: true,
 		glutenFree: false,
         organic: true,
 		price: 5.45
 	},
     {
-		name: "ground pork",
+		name: "celery",
 		vegetarian: false,
 		glutenFree: true,
         organic: true,
